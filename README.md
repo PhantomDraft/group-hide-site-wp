@@ -1,6 +1,10 @@
 # PD Hide Site
 
-PD Hide Site – a plugin for flexible site hiding. It provides the following functionalities:
+PD Hide Site – a plugin for flexible site hiding.
+
+![PD Hide Site – a plugin for flexible site hiding.][(https://example.com/sunset.jpg)](https://github.com/PhantomDraft/group-hide-site-wp/blob/main/cover.png)
+
+It provides the following functionalities:
 
 - **Complete Site Hiding:**  
   Allows you to completely hide your website and redirect visitors to a specified page or login page.
