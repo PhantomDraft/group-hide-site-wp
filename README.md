@@ -1,4 +1,4 @@
-# PD Hide Site
+# PD Group Hide Site
 
 PD Hide Site – a plugin for flexible site hiding.
 
