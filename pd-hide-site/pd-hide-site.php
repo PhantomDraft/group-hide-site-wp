@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: PD Group Hide Site
+ * Plugin URI: https://github.com/PhantomDraft/group-hide-site-wp
  * Description: This plugin allows you to hide your website entirely with a redirect to a specified page or login page. You can also choose to hide only for specific roles, or hide only specific content (by ID or slug) with individual group settings.
  * Version:     1.1
  * Author:      PD
@@ -254,18 +255,21 @@ class PD_Hide_Site {
      * Add settings menu.
      */
     public function add_admin_menu() {
-        // Add top-level "PD" menu
-        add_menu_page(
-            'PD',
-            'PD',
-            'manage_options',
-            'pd_main_menu',
-            '', // You can pass a function if you want the main page to output something
-            'dashicons-shield', // Icon (optional)
-            2  // Menu position (optional)
-        );
+        // Если глобальное меню "PD" ещё не зарегистрировано, регистрируем его
+        if ( ! defined( 'PD_GLOBAL_MENU_REGISTERED' ) ) {
+            add_menu_page(
+                'PD',                           // Заголовок в админке
+                'PD',                           // Название в меню
+                'manage_options',               // Необходимые права
+                'pd_main_menu',                 // Слаг глобального меню
+                'pd_global_menu_callback',      // Функция-колбэк для глобальной страницы меню
+                'dashicons-shield',             // Иконка (щит)
+                2                               // Позиция в меню
+            );
+            define( 'PD_GLOBAL_MENU_REGISTERED', true );
+        }
 
-        // Add submenu for PD Group Hide Site settings
+        // Добавляем подменю для PD Group Hide Site
         add_submenu_page(
             'pd_main_menu',
             'PD Group Hide Site',
@@ -436,6 +440,18 @@ class PD_Hide_Site {
             wp_redirect( $url );
         }
         exit;
+    }
+}
+
+if ( ! function_exists( 'pd_global_menu_callback' ) ) {
+    function pd_global_menu_callback() {
+        ?>
+        <div class="wrap">
+            <h1>PD Global Menu</h1>
+            <p>Please visit our GitHub page:</p>
+            <p><a href="https://github.com/PhantomDraft" target="_blank">https://github.com/PhantomDraft</a></p>
+        </div>
+        <?php
     }
 }
 
